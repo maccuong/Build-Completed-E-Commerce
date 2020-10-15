@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Categrories List</h1>
+                </div>
+               
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Categrories List</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                            <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                                <div class="col-sm-12">
+                                    <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" role="grid" aria-describedby="example2_info">
+                                        <thead>
+                                            <tr><th rowspan="1" colspan="1">Id</th><th rowspan="1" colspan="1">Name</th><th rowspan="1" colspan="1">Status(s)</th><th rowspan="1" colspan="1">Parent(s)</th><th rowspan="1" colspan="1">Action</th></tr>                                        </thead>
+                                        <tbody>
+                                            @foreach (var category in ViewBag.categories)
+                                            {
+                                            <tr role="row" class="odd">
+                                                <td class="" tabindex="0">@category.Id</td>
+                                                <td class="sorting_1"> <b>@category.Name</b></td>
+                                                <td>@(category.Status? "Show":"Hide")</td>
+                                                <td> @(category.Parent==null? "": category.Parent.Name)</td>
+                                                <td><a asp-area="admin" asp-controller="category" asp-action="edit"
+                                                asp-route-id="@category.Id">Edit|</a>
+                                                    @if (category.InverseParents != null && category.InverseParents.Count == 0)
+                                                    {
+                                                        <a asp-area="admin" asp-controller="category" asp-action="delete"
+                                                           asp-route-id="@category.Id"
+                                                           onclick="return confirm('Are you sure?')">Delete <span>|</span></a>
+                                                    }
+                                                   Add sub Category
+                                                </td>
+
+                                                @*category.InverseParents != null &&*@
+                                            </tr>
+                                                if (category.InverseParents != null && category.InverseParents.Count != 0)
+                                                {
+                                                    foreach (var subCategory in category.InverseParents)
+                                                    {
+                                        <tr role="row" class="odd">
+                                            <td class="" tabindex="0">@subCategory.Id</td>
+                                            <td class="sorting_1">
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @subCategory.Name
+                                            </td>
+                                            <td>@(subCategory.Status? "Show":"Hide")</td>
+                                            <td>@(subCategory.Parent.Name )</td>
+                                            <td>
+                                                <a asp-area="admin" asp-controller="category" asp-action="edit"
+                                                   asp-route-id="@subCategory .Id">Edit|</a>|
+                                                <a asp-area="admin" asp-controller="category" asp-action="delete"
+                                                         asp-route-id="@subCategory.Id"
+                                                         onclick="return confirm('Are you sure?')">Delete <span>|</span></a>
+                                            </td>
+                                        </tr>
+                                                    }
+                                                }
+                                            }
+                                        </tbody>
+                                        <tfoot>
+                                            <tr><th rowspan="1" colspan="1">Id</th><th rowspan="1" colspan="1">Name</th><th rowspan="1" colspan="1">Status(s)</th><th rowspan="1" colspan="1">Parent(s)</th><th rowspan="1" colspan="1">Action</th></tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div><div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="example2_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="example2_previous"><a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul></div></div></div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+            </div>
+</section>

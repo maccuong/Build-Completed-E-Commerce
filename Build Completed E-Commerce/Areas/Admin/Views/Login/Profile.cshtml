@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@using System.Security.Claims
+@{ var user = User.FindFirst(ClaimTypes.Name); }
+@model Build_Completed_E_Commerce.Models.Account
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Profile</h1>
+            </div>
+
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Acount Info</h3>
+                </div>
+
+                
+                <form asp-area="admin" asp-controller="login" asp-action="profile" role="form">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username" required="required" asp-for="Username">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Passwords</label>
+                            <input type="password" class="form-control" id="password" required="required" asp-for="Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="fullname">Fullname</label>
+                            <input type="text" class="form-control" id="fullname" asp-for="FullName" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" asp-for="Email" required="required">
+                        </div>
+                        @*<div class="form-check">
+                        <input type="checkbox" class="form-check-input"  asp-for="Status" id="status">
+                        <label class="form-check-label" for="status">Status</label>
+                          </div>*@
+                    </div>
+                    <!-- /.card-body -->
+                    <span class="text-green">@ViewBag.msg</span>
+                    <div class="card-footer">
+                        <input type="hidden" asp-for="Id"/>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+
