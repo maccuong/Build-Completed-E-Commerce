@@ -73,5 +73,16 @@ namespace Build_Completed_E_Commerce.Areas.Admin.Controllers
             db.SaveChanges();
             return RedirectToAction("Index", "category", new { area = "admin" });
         }
+
+        [HttpPost]//thêm subcategory
+        [Route("addsubcategory/{id}")]
+        public IActionResult AddSubcategory(int id)// tên asp-action phải cùng tên với phương thức trong controller
+        {
+            var category = new Category() { 
+                    ParentId= id
+            };
+
+            return View("AddSubCategory", category);
+        }
     }
 }

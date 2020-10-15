@@ -45,7 +45,9 @@
                                                            asp-route-id="@category.Id"
                                                            onclick="return confirm('Are you sure?')">Delete <span>|</span></a>
                                                     }
-                                                   Add sub Category
+                                                <a asp-area="admin" asp-controller="category" asp-action="addsubcategory"
+                                                   asp-route-id="@category.Id"
+                                                   onclick="return confirm('Are you sure?')">Add sub Category <span>|</span></a>
                                                 </td>
 
                                                 @*category.InverseParents != null &&*@
@@ -63,7 +65,7 @@
                                             <td>@(subCategory.Parent.Name )</td>
                                             <td>
                                                 <a asp-area="admin" asp-controller="category" asp-action="edit"
-                                                   asp-route-id="@subCategory .Id">Edit|</a>|
+                                                   asp-route-id="@subCategory.Id">Edit|</a>|
                                                 <a asp-area="admin" asp-controller="category" asp-action="delete"
                                                          asp-route-id="@subCategory.Id"
                                                          onclick="return confirm('Are you sure?')">Delete <span>|</span></a>
